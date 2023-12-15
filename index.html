@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIREACONDICIONADO</title>
+  <style>
+
+    h1 {
+      
+      color: rgb(93, 129, 238);
+       text-align: center; 
+    }
+
+    #columna1 {
+    position:absolute;
+    top:59px;
+    left:150px;
+    width:200px;
+    margin-top:100px;
+    }
+    #columna2 {
+    position:absolute;
+    top:59px;
+    left:500px;
+    width:200px;
+    margin-top:100px;
+
+    }
+
+    body {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #left-container, #right-container {
+      width: 90%;
+      padding: 30px;
+    }
+
+    input, select {
+      width: calc(100% - 10px);
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    .imagen {
+    margin-top: -350px;
+    float:center;
+    width: 20%;
+    padding: 400px;
+    margin-left: 350px;
+    }
+
+    button {
+      width: px;
+      height: auto;
+      display: inline-block;
+      background-color: #040404;
+      color: rgb(255, 255, 255);
+      padding: 10px 20px;
+      border-bottom: #ffffff;
+      cursor: pointer;
+      margin-top: 0px;     
+    }
+
+    table {
+      width: 100%;
+      margin-top: -290px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 5px solid #bddcc9;
+      padding: 5px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="left-container">
+    <h1>AIRE ACONDICIONADO</h1>
+    <form id="airConditionerForm">
+        <div id="columna1">
+      <label for="codigo">CODIGO:</label>
+      <input type="text" id="codigo" maxlength="5" required>
+
+      <label for="marca">MARCA:</label>
+      <input type="text" id="marca" required>
+
+      <label for="tamano">TAMAÑO:</label>
+      <select id="tamano" required>
+        <option>selecionar</option>
+        <option value="Grande">Grande</option>
+        <option value="Mediano">Mediano</option>
+        <option value="Pequeño">Pequeño</option>
+      </select>
+
+      <label for="color">COLOR:</label>
+      <select id="color" required>
+        <option>selecionar</option>
+        <option value="Blanco">Blanco</option>
+        <option value="Negro">Negro</option>
+        <option value="Plateado">Plateado</option>
+      </select>
+
+      <label for="voltaje">VOLTAJE:</label>
+      <select id="voltaje" required>
+        <option>selecionar</option>
+      <option value="120 Volts">120V</option>
+      <option value="220 Volts">220V</option>
+    </select>
+    </div>
+
+    <div id="columna2">
+      <label for="potencia">POTENCIA:</label>
+      <input type="text" id="potencia" required>
+
+      <label for="ruido">NIVEL DE RUIDO:</label>
+      <select id="ruido" required>
+        <option>selecionar</option>
+        <option value="20dB">20dB</option>
+        <option value="40dB">40dB</option>
+        <option value="60dB">60dB</option>
+      </select>
+
+      <label for="tipo">TIPO:</label>
+      <select id="tipo" required>
+        <option>selecionar</option>
+        <option value="Split">Split</option>
+        <option value="Cuadrado">Cuadrado</option>
+        <option value="Portatil">Portatil</option>
+      </select>
+
+      <label for="precio">PRECIO:</label>
+      <input type="text" id="precio" required>
+
+      <label for="estado">ESTADO:</label>
+      <select id="estado" required>
+        <option>selecionar</option>
+        <option value="Nuevo">Nuevo</option>
+        <option value="Seminuevo">Seminuevo</option>
+      </select>
+    <p>
+      <button type="button" onclick="insertar()">Insertar</button>
+      <button type="button" onclick="consultar()">Consultar</button>
+    </p>
+    </div>
+    </form>
+    <div class="imagen">
+        <img width="500" height="300" src="https://images.unsplash.com/photo-1590756254933-2873d72a83b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWlyJTIwY29uZGl0aW9uZXJ8ZW58MHx8MHx8fDA%3D" alt="Aire Acondicionado">
+    </div>
+    <div>
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Codigo</th>
+            <th>Marca</th>
+            <th>Tamaño</th>
+            <th>Color</th>
+            <th>Voltaje</th>
+            <th>Potencia</th>
+            <th>Nivel De Ruido</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <script>
+      function insertar() {
+        // Validaciones
+        var form = document.getElementById('airConditionerForm');
+        if (!form.checkValidity()) {
+          alert('Todos los campos son obligatorios.');
+          return;
+        }
+        // Crear un objeto con los datos del formulario
+        var data = {
+          codigo: document.getElementById('codigo').value,
+          marca: document.getElementById('marca').value,
+          tamano: document.getElementById('tamano').value,
+          color: document.getElementById('color').value,
+          voltaje: document.getElementById('voltaje').value,
+          potencia: document.getElementById('potencia').value,
+          ruido: document.getElementById('ruido').value,
+          tipo: document.getElementById('tipo').value,
+          precio: document.getElementById('precio').value,
+          estado: document.getElementById('estado').value
+        };
+        // Insertar en la tabla
+        var table = document.getElementById('dataTable');
+        var row = table.insertRow(-1);
+        Object.values(data).forEach((value) => {
+          var cell = row.insertCell();
+          cell.textContent = value;
+        });
+        // Botones de modificar y eliminar
+        var actionsCell = row.insertCell();
+        actionsCell.innerHTML = '<button class="btn" onclick="modificar(this)">Modificar</button>' +
+        
+        '<button class="btn" onclick="eliminar(this)">Eliminar</button>';
+        // Limpiar el formulario
+        form.reset();
+      }
+      function consultar() {
+        var codigoConsulta = prompt('Ingrese el codigo a consultar:');
+        if (!codigoConsulta) return;
+        var table = document.getElementById('dataTable');
+        var rows = table.getElementsByTagName('tr');
+        for (var i = 1; i < rows.length; i++) {
+          var codigo = rows[i].cells[0].textContent;
+          if (codigo === codigoConsulta) {
+            alert('Datos encontrados:\n' + rows[i].textContent);
+            return;
+          }
+        }
+        alert('No se encontraron datos con el codigo proporcionado.');
+      }
+      function modificar(btn) {
+      var codigoModificacion = prompt('Ingrese el codigo a modificar:');
+      if (!codigoModificacion) return;
+      var table = document.getElementById('dataTable');
+      var rows = table.getElementsByTagName('tr');
+      for (var i = 1; i < rows.length; i++) {
+        var codigo = rows[i].cells[0].textContent;
+        if (codigo === codigoModificacion) {
+          // Llenar el formulario con los datos actuales
+          document.getElementById('codigo').value = rows[i].cells[0].textContent;
+          document.getElementById('marca').value = rows[i].cells[1].textContent;
+          document.getElementById('tamano').value = rows[i].cells[2].textContent;
+          document.getElementById('color').value = rows[i].cells[3].textContent;
+          document.getElementById('voltaje').value = rows[i].cells[4].textContent;
+          document.getElementById('potencia').value = rows[i].cells[5].textContent;
+          document.getElementById('ruido').value = rows[i].cells[6].textContent;
+          document.getElementById('tipo').value = rows[i].cells[7].textContent;
+          document.getElementById('precio').value = rows[i].cells[8].textContent;
+          document.getElementById('estado').value = rows[i].cells[9].textContent;
+          // Deshabilitar el campo 'codigo' para evitar cambios
+          document.getElementById('codigo').readOnly = true;
+          // Cambiar el botón de 'Insertar' a 'Guardar'
+          var insertarBtn = document.querySelector('button[onclick="insertar()"]');
+          insertarBtn.innerHTML = 'Guardar';
+          insertarBtn.onclick = function() { guardarModificacion(i); };
+          return;
+        }
+      }
+      alert('No se encontraron datos con el codigo proporcionado.');
+    }
+    function guardarModificacion(rowIndex) {
+      // Obtener los nuevos valores del formulario
+      var nuevoMarca = document.getElementById('marca').value;
+      var nuevoTamano = document.getElementById('tamano').value;
+      var nuevoColor = document.getElementById('color').value;
+      var nuevoVoltaje = document.getElementById('voltaje').value;
+      var nuevaPotencia = document.getElementById('potencia').value;
+      var nuevoRuido = document.getElementById('ruido').value;
+      var nuevoTipo = document.getElementById('tipo').value;
+      var nuevoPrecio = document.getElementById('precio').value;
+      var nuevoEstado = document.getElementById('estado').value;
+      // Actualizar la tabla con los nuevos valores
+      var table = document.getElementById('dataTable');
+      var row = table.rows[rowIndex];
+      row.cells[1].textContent = nuevoMarca;
+      row.cells[2].textContent = nuevoTamano;
+      row.cells[3].textContent = nuevoColor;
+      row.cells[4].textContent = nuevoVoltaje;
+      row.cells[5].textContent = nuevaPotencia;
+      row.cells[6].textContent = nuevoRuido;
+      row.cells[7].textContent = nuevoTipo;
+      row.cells[8].textContent = nuevoPrecio;
+      row.cells[9].textContent = nuevoEstado;
+      // Limpiar el formulario y restaurar botones
+      document.getElementById('airConditionerForm').reset();
+      document.getElementById('codigo').readOnly = false;
+      var insertarBtn = document.querySelector('button[onclick="guardarModificacion()"]');
+      insertarBtn.innerHTML = 'Insertar';
+      insertarBtn.onclick = function() { insertar(); };
+    }
+      function eliminar(btn) {
+        var confirmacion = confirm('¿Está seguro de que desea eliminar estos datos?');
+        if (confirmacion) {
+          var row = btn.parentNode.parentNode;
+          row.parentNode.removeChild(row);
+        }
+      }
+        </script>
+    <body>
+<html>
